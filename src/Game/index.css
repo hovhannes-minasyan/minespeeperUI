@@ -1,0 +1,117 @@
+.game-row {
+  margin-bottom: -4px;
+  padding: 0;
+}
+.game-cell {
+  display: inline-block;
+  width: 2vw;
+  height: 2vw;
+  min-width: 20px;
+  min-height: 20px;
+}
+.game-container {
+  min-width: 280px;
+  width: fit-content;
+  height: fit-content;
+  display: inline-block;
+  padding: 10px 20px 40px 20px;
+  margin-top: 20px;
+}
+.game-container:active {
+  box-shadow: inset -3px -3px #0a0a0a, inset 3px 3px #fff, inset -6px -6px grey, inset 6px 6px #dfdfdf;
+}
+.game-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.game-score {
+  width: 72px;
+  height: 32px;
+  color: #ff0100;
+  background-color: #600000;
+  text-align: left;
+  font-size: 40px;
+  font-weight: bolder;
+  font-family: 'digital-clock-font';
+  padding: 4px;
+  margin: 10px 0;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+.game-restart {
+  width: 48px;
+  height: 48px;
+  background-image: url("../assets/Icons/face_unpressed.svg");
+  background-size: cover;
+}
+.game-restart.fail {
+  background-image: url("../assets/Icons/face_lose.svg");
+}
+.game-digital {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.game-letter {
+  width: 33%;
+  text-align: right;
+}
+.game-wrapper {
+
+}
+.game-header{
+  display: flex;
+  height: 64px;
+  background-color: silver;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+.logout {
+  color: #282c34;
+  font-weight: bold;
+  padding: 4px;
+  cursor: pointer;
+}
+.game-mode {
+  padding: 4px;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.game-mode{
+  /*box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;*/
+  display: flex ;
+  justify-content: center;
+}
+.game-mode-container {
+  width: 50%;
+  margin: auto;
+}
+table {
+  margin: 20px 0px;
+  width: 100%;
+}
+.game-mode-wrapper td,.game-mode-wrapper th {
+  width: 33%;
+  padding: 8px;
+  text-align: left;
+  height: 32px;
+}
+.game-leaderboard td, .game-leaderboard th {
+  width: 50%;
+  height: 32px;
+  padding: 8px;
+  text-align: left;
+}
+tr {
+  background-color: silver;
+}
+select {
+  margin-top: 48px
+}
+select, option {
+  width: 100%;
+  padding: 10px 20px;
+}
