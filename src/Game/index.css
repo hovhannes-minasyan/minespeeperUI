@@ -5,8 +5,8 @@
 
 .game-cell {
     display: inline-block;
-    width: 2.2vw;
-    height: 2.2vw;
+    width: 2vw;
+    height: 2vw;
     min-width: 20px;
     min-height: 20px;
 }

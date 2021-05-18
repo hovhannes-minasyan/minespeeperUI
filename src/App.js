@@ -1,4 +1,3 @@
-import './App.css';
 import {useState, useEffect} from 'react';
 import Register from "./Auth/Register";
 import Login from "./Auth/Login";

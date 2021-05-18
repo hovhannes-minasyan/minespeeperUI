@@ -12,13 +12,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 @font-face {
   font-family: 'digital-clock-font';
   src: url("./assets/Fonts/digital-7.ttf");
 }
 
+.App {
+  text-align: center;
+}
 
 .error-message {
   color: red;
   font-weight: bold;
+}
+
+.old-button{
+  background: silver;
+  box-shadow: inset -3px -3px #0a0a0a, inset 3px 3px #fff, inset -6px -6px grey, inset 6px 6px #dfdfdf;
+}
+
+.old-button:active {
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
 }
