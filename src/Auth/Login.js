@@ -1,28 +1,29 @@
 import './index.css';
-import { useState, useCallback } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {useState, useCallback} from 'react';
+import {Link, useHistory} from 'react-router-dom';
 import FetchService from "../utils/FetchService";
 
 export default function Login({setUser}) {
+  const [error, setError] = useState('');
   const [userData, setUserData] = useState({});
   const history = useHistory();
 
   const handleChange = useCallback((e, fieldName) => {
-    setUserData(prev => ({...prev, [fieldName]: e.target.value }));
+    setUserData(prev => ({...prev, [fieldName]: e.target.value}));
   }, []);
 
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
-    const { data: { token } }  = await FetchService.post('auth/login', userData);
-    sessionStorage.setItem('token', token);
-    // change
-    setUser({
-      firstName: "AAA",
-      id: "609bd8435a25e942c850f6ae",
-      lastName: "LastName",
-      username: "someone",
-    });
-    history.push('/game');
+    try {
+      const {data: {token}} = await FetchService.post('auth/login', userData);
+      sessionStorage.setItem('token', token);
+      const res = await FetchService.get('users');
+      setUser(res.data);
+      history.push('/game');
+    } catch (err) {
+      sessionStorage.removeItem('token');
+      setError(err.response.data.message);
+    }
   }, [history, setUser, userData]);
 
   return (<div className="auth-container">
@@ -33,17 +34,18 @@ export default function Login({setUser}) {
             className="auth-field"
             name="username"
             placeholder="username"
-            onChange={(e) => handleChange(e,'username')}
+            onChange={(e) => handleChange(e, 'username')}
           />
           <input
             type="password"
             className="auth-field"
             name="password"
             placeholder="Password"
-            onChange={(e) => handleChange(e,'password')}
+            onChange={(e) => handleChange(e, 'password')}
           />
-          <button className="auth-submit" onClick={handleSubmit}> Log in </button>
+          <button className="auth-submit" onClick={handleSubmit}> Log in</button>
         </form>
+        <p className="error-message">{error}</p>
         <span> Don't have an account? <Link className="auth-link" to="/register"> Register </Link></span>
       </div>
     </div>

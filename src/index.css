@@ -16,3 +16,9 @@ code {
   font-family: 'digital-clock-font';
   src: url("./assets/Fonts/digital-7.ttf");
 }
+
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}

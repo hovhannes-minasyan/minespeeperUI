@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import FetchService from "../utils/FetchService";
 
 export default function Register() {
+  const [error, setError] = useState('');
   const [userData, setUserData] = useState({});
   const history = useHistory();
 
@@ -13,8 +14,13 @@ export default function Register() {
 
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
-    await FetchService.post('users', userData);
-    history.push('/login');
+    try{
+      await FetchService.post('users', userData);
+      history.push('/login');
+    }
+    catch(err) {
+      setError(err.response.data.message);
+    }
   }, [history, userData]);
 
   return (<div className="auth-container">
@@ -56,8 +62,9 @@ export default function Register() {
             onChange={(e) => handleChange(e,'password')}
           />
 
-          <button className="auth-submit" onClick={handleSubmit}> Register</button>
+          <button className="auth-submit" onClick={handleSubmit}> Register </button>
         </form>
+        <p className="error-message">{error}</p>
         <span> Already have an account? <Link className="auth-link" to="/login"> Log in </Link></span>
       </div>
     </div>
