@@ -36,10 +36,12 @@ export default function Game({user, setUser}) {
     chooseMode(mode);
   }, [chooseMode, mode]);
 
-  const quit = useCallback(() => {
+  const quit = useCallback(async () => {
     setMatrix([]);
+    const resp = await FetchService.get("users");
+    setUser(resp.data)
     localStorage.removeItem('gameId');
-  }, []);
+  }, [user, setUser]);
 
   return (
     <div className="game-wrapper">
