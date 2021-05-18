@@ -33,7 +33,7 @@ export default function Login({setUser}) {
             type="text"
             className="auth-field"
             name="username"
-            placeholder="username"
+            placeholder="Username"
             onChange={(e) => handleChange(e, 'username')}
           />
           <input

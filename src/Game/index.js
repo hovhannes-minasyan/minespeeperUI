@@ -13,9 +13,9 @@ export default function Game({user, setUser}) {
   const modes = useMemo(() => ['Easy', 'Medium', 'Hard'], []);
   const gameId = localStorage.getItem('gameId');
 
-  const chooseMode = useCallback((i) => {
+  const chooseMode = useCallback(async (i) => {
     setMode(i);
-    const data = FetchService.post('games', {
+    const data = await FetchService.post('games', {
       difficulty: modes[i],
     });
     const [height, width] = data.data.dimentions;
