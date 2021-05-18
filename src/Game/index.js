@@ -15,21 +15,20 @@ export default function Game({user, setUser}) {
 
   const chooseMode = useCallback((i) => {
     setMode(i);
-    FetchService.post('games', {
+    const data = FetchService.post('games', {
       difficulty: modes[i],
-    }).then((data) => {
-      const [height, width] = data.data.dimentions;
-      setMineCount(data.data.mineCount);
-      localStorage.setItem('gameId', data.data.id);
-      const newMatrix = [];
-      for (let i = 0; i < height; i++) {
-        newMatrix.push([]);
-        for (let j = 0; j < width; j++) {
-          newMatrix[i][j] = CLOSED;
-        }
+    });
+    const [height, width] = data.data.dimentions;
+    setMineCount(data.data.mineCount);
+    localStorage.setItem('gameId', data.data.id);
+    const newMatrix = [];
+    for (let i = 0; i < height; i++) {
+      newMatrix.push([]);
+      for (let j = 0; j < width; j++) {
+        newMatrix[i][j] = CLOSED;
       }
-      setMatrix(newMatrix);
-    })
+    }
+    setMatrix(newMatrix);
   }, [modes, setMatrix, setMineCount]);
 
   const restart = useCallback(() => {

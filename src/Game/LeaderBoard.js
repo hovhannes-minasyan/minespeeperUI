@@ -5,18 +5,16 @@ export default function LeaderBoard ({ user }) {
   const [mode, setMode] = useState('Easy');
   const [leaders, setLeaders] = useState([]);
 
-  const handleSelect = useCallback((e) => {
+  const handleSelect = useCallback(async (e) => {
     const newMode = e.target.value;
-    FetchService.get(`users/leaderboard/${newMode}`).then(res => {
-      setLeaders(res.data);
-    });
+    const res = await FetchService.get(`users/leaderboard/${newMode}`)
+    setLeaders(res.data);
     setMode(newMode);
   }, []);
 
-  useEffect(() => {
-    FetchService.get(`users/leaderboard/${mode}`).then(res => {
-      setLeaders(res.data);
-    });
+  useEffect( async () => {
+    const res = await FetchService.get(`users/leaderboard/${mode}`);
+    setLeaders(res.data);
   }, [mode])
 
   return (<div className="game-leaderboard">
