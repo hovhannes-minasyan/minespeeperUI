@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import FetchService from '../utils/FetchService';
 
 export default function LeaderBoard ({ user }) {
-  const [mode, setMode] = useState('medium');
+  const [mode, setMode] = useState('Easy');
   const [leaders, setLeaders] = useState([]);
 
   const handleSelect = useCallback((e) => {
@@ -21,9 +21,9 @@ export default function LeaderBoard ({ user }) {
 
   return (<div className="game-leaderboard">
     <select className="select" value={mode} onChange={handleSelect}>
-      <option value="easy"> Easy </option>
-      <option value="medium"> Medium </option>
-      <option value="hard"> Hard </option>
+      <option value="Easy"> Easy </option>
+      <option value="Medium"> Medium </option>
+      <option value="Hard"> Hard </option>
     </select>
     <table>
       <thead>
