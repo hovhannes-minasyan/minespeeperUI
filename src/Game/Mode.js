@@ -19,7 +19,7 @@ export default function Mode({user, modes, chooseMode, setMineCount}) {
               <td>{mode}</td>
               <td>{user.bestTimes[mode]}</td>
               <td>
-                <button className="game-mode" onClick={() => chooseMode(i)}>Play!</button>
+                <button className="game-mode" onClick={() => chooseMode(mode)}>Play!</button>
               </td>
             </tr>
           ))

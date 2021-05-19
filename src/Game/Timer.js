@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react';
 import DigitalText from "./DigitalText";
 
-export default function Timer({ reset, setReset, isStopped }) {
+export default function Timer({ reset, setReset, isStopped, initialTime=0 }) {
   const [time, setTime] = useState(0);
+  console.log(initialTime)
   useEffect(() => {
     const id = setInterval(() => setTime(prev => {
       if(isStopped || prev >= 999) return prev;
@@ -18,5 +19,5 @@ export default function Timer({ reset, setReset, isStopped }) {
     }
   }, [reset, setReset])
 
-  return (<DigitalText text={`${time}`.padStart(3, '0')} />)
+  return (<DigitalText text={`${Math.min(initialTime + time, 999)}`.padStart(3, '0')} />)
 }

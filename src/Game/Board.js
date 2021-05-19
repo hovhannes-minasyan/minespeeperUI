@@ -5,7 +5,7 @@ import copyMatrix from "../utils/copyMatrix";
 import {CLOSED, FLAG, MINE} from "../utils/constants";
 import FetchService from '../utils/FetchService';
 
-export default function Board({matrix, restart, mineCount, setMatrix}) {
+export default function Board({matrix, restart, mineCount, setMatrix, initialTime}) {
   const [error, setError] = useState('');
   const [flagCount, setFlagCount] = useState(0);
   const [resetTimer, setResetTimer] = useState(false);
@@ -28,7 +28,7 @@ export default function Board({matrix, restart, mineCount, setMatrix}) {
 
   const handleFlag = useCallback((e, i, j) => {
     e.preventDefault();
-    if (flagCount >= mineCount) return;
+    if (flagCount >= mineCount && matrix[i][j] != FLAG) return;
 
     if (matrix[i][j] === FLAG) {
       setCell(i, j, CLOSED);
@@ -46,10 +46,16 @@ export default function Board({matrix, restart, mineCount, setMatrix}) {
     setError();
     if (matrix[i][j] !== CLOSED) return;
     try {
-      const data = await FetchService.patch(`games/${localStorage.getItem('gameId')}`, [i, j])
+      const gameId = localStorage.getItem('gameId');
+      if(!gameId){
+        return 
+      }
+      const data = await FetchService.patch(`games/${gameId}`, [i, j])
       const cells = Array.from(data.data.Cells);
       setCellArray(cells);
-      
+      if (data.data.Status == 'Lose' || data.data.Status == 'Win'){
+        localStorage.removeItem('gameId');
+      }
       setGameStatus(data.data?.Status || '');
     } catch (err) {
       setError(err.response.data.message);
@@ -72,7 +78,7 @@ export default function Board({matrix, restart, mineCount, setMatrix}) {
           </div>
           <div onClick={handleRestart} className={`game-restart old-button ${gameStatus}`}/>
           <div className="game-score">
-            <Timer reset={resetTimer} setReset={setResetTimer} isStopped={!!gameStatus}/>
+            <Timer reset={resetTimer} setReset={setResetTimer} isStopped={!!gameStatus} initialTime={initialTime}/>
           </div>
         </div>
         {matrix.map((item, i) => {
